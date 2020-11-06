@@ -39,10 +39,12 @@ class SampleRestConnector internal constructor(
 
             router.post(path).handler { context ->
                 try {
+                    logger.info("Etape 01")
                     executor.executeBlocking {
                         handleRequest(controller, context, context.bodyAsString)
                     }
                 } catch (e: Throwable) {
+                    logger.info("Etape 02")
                     context.fail(e)
                 }
             }
@@ -57,14 +59,17 @@ class SampleRestConnector internal constructor(
     ) {
         val timerData = BotRepository.requestTimer.start("sample_webhook")
         try {
-            logger.debug { "Sample request input : $body" }
+            logger.info("Etape 03")
+            logger.info { "Sample request input : $body" }
             val request: SampleConnectorRequest = mapper.readValue(body)
             val callback = SampleRestConnectorCallback(applicationId, request.locale, context)
             controller.handle(request.toEvent(applicationId), ConnectorData(callback))
         } catch (t: Throwable) {
+            logger.info("Etape 04 $t")
             BotRepository.requestTimer.throwable(t, timerData)
             context.fail(t)
         } finally {
+            logger.info("Etape 05")
             BotRepository.requestTimer.end(timerData)
         }
     }
@@ -72,16 +77,21 @@ class SampleRestConnector internal constructor(
     override fun send(event: Event, callback: ConnectorCallback, delayInMs: Long) {
         val c = callback as? SampleRestConnectorCallback
         c?.addAction(event)
+        logger.info("Etape 06")
         if (event is Action) {
+            logger.info("Etape 07")
             if (event.metadata.lastAnswer) {
+                logger.info("Etape 08")
                 c?.sendResponse()
             }
         } else {
+            logger.info("Etape 09")
             logger.trace { "unsupported event: $event" }
         }
     }
 
     override fun loadProfile(callback: ConnectorCallback, userId: PlayerId): UserPreferences {
+        logger.info("Etape 10")
         callback as SampleRestConnectorCallback
         return UserPreferences().apply {
             locale = callback.locale
