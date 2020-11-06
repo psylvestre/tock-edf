@@ -34,6 +34,7 @@ class SampleRestConnector internal constructor(
 
     override fun register(controller: ConnectorController) {
         controller.registerServices(path) { router ->
+            logger.info("Request for path $path")
             logger.info("deploy sample rest connector services for root path $path ")
 
             router.post(path).handler { context ->
