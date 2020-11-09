@@ -23,10 +23,10 @@ internal class SampleRestConnectorCallback(
     fun addAction(event: Event) {
         logger.info("Etape 11")
         if (event is Action) {
-            logger.info("Etape 12")
+            logger.info("Etape 12 $event")
             actions.add(event)
         } else {
-            logger.info("Etape 13")
+            logger.info("Etape 13 $event")
             logger.trace { "unsupported event: $event" }
         }
     }
@@ -37,13 +37,15 @@ internal class SampleRestConnectorCallback(
             .filterIsInstance<SendSentence>()
             .mapNotNull {
                 if (it.stringText != null) {
+                    logger.info("Etape 14.1 $it")
                     SampleMessage(it.stringText!!)
                 } else it.message(sampleRestConnectorType)?.let {
+                    logger.info("Etape 14.2 map null")
                     it as? SampleMessage
                 }
 
             }
-        logger.info("Etape 15")
+        logger.info("Etape 15 $messages")
         context.response().end(mapper.writeValueAsString(SampleConnectorResponse(messages)))
     }
 }

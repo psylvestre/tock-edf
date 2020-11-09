@@ -79,7 +79,7 @@ class SampleRestConnector internal constructor(
         c?.addAction(event)
         logger.info("Etape 06")
         if (event is Action) {
-            logger.info("Etape 07")
+            logger.info("Etape 07 $event")
             if (event.metadata.lastAnswer) {
                 logger.info("Etape 08")
                 c?.sendResponse()
