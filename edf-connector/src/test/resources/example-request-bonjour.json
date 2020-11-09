@@ -1,0 +1,17 @@
+{
+  "namespace": "app",
+  "applicationName": "bot_open_data",
+  "language": "fr",
+  "botApplicationConfigurationId": "5fa5691fbd0442313af1d4f3",
+  "message": {
+    "eventTypeEnum": 0,
+    "delay": 0,
+    "eventType": "sentence",
+    "messages": [],
+    "text": "Hello"
+  },
+  "userIdModifier": "_7whu0z28h",
+  "userId": "1234567890",
+  "query": "Bonjour",
+  "payload": ""
+}
