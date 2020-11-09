@@ -15,7 +15,7 @@
         <kotlin.compiler.languageVersion>1.4</kotlin.compiler.languageVersion>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
         <kotlin.code.style>official</kotlin.code.style>
-        <main.class>ai.tock.bot.open.data.opendata.StartKt</main.class>
+        <main.class>ai.tock.bot.edf.StartBotKt</main.class>
         <junit.version>4.12</junit.version>
     </properties>
 

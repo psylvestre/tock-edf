@@ -17,7 +17,7 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ai.tock.bot.open.data.opendata
+package ai.tock.bot.edf
 
 import ai.tock.bot.engine.BotRepository
 import ai.tock.bot.importI18nDump
@@ -26,28 +26,23 @@ import ai.tock.bot.registerAndInstallBot
 import ai.tock.translator.Translator
 
 fun main(args: Array<String>) {
-    Start.start()
+    StartBot.start()
 }
 
 /**
  * This is the entry point of the bot.
  */
-object Start {
+object StartBot {
 
     fun start() {
         //set default zone id, these are french trains, so...
         System.setProperty("tock_default_zone", "Europe/Paris")
+        System.setProperty("tock_default_locale", "fr")
+
         //enable i18n as two locales are supported
         Translator.enabled = true
 
-        //add evaluation for [PlaceValue] after nlp response
-        BotRepository.registerNlpListener(OpenDataNlpListener)
-
         //register the bot
-        registerAndInstallBot(openBot)
-
-        //load NLP model and i18n labels
-        importNlpDump("/bot_open_data.json")
-        importI18nDump("/labels.json")
+        registerAndInstallBot(edfBot)
     }
 }
