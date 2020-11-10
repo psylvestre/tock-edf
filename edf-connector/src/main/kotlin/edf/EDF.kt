@@ -21,11 +21,11 @@ import ai.tock.bot.definition.ConnectorStoryHandler
 import kotlin.reflect.KClass
 
 /**
- * To specify [ConnectorStoryHandler] for Sample connector.
+ * To specify [ConnectorStoryHandler] for EDF connector.
  * [KClass] passed as [value] of this annotation must have a primary constructor
  * with a single not optional [StoryHandlerDefinitionBase] argument.
  */
 @ConnectorHandler(connectorTypeId = EDF_CONNECTOR_ID)
 @Target(AnnotationTarget.CLASS)
 @MustBeDocumented
-annotation class SampleHandler(val value: KClass<out ConnectorStoryHandler<*>>)
+annotation class EDF(val value: KClass<out ConnectorStoryHandler<*>>)

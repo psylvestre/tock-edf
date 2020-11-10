@@ -44,5 +44,10 @@ object StartBot {
 
         //register the bot
         registerAndInstallBot(edfBot)
+
+        //load NLP model and i18n labels
+        importNlpDump("/edf_model.json")
+
+
     }
 }

@@ -8,7 +8,7 @@ import ai.tock.bot.engine.user.PlayerType.bot
 import ai.tock.shared.defaultLocale
 import java.util.Locale
 
-data class SampleConnectorRequest(val query: String? = null, val payload: String? = null, val userId: String, val locale: Locale = defaultLocale) {
+data class EDFConnectorRequest(val query: String? = null, val payload: String? = null, val userId: String, val locale: Locale = defaultLocale) {
 
     fun toEvent(applicationId: String): Event =
         if (query != null) {

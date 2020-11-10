@@ -7,13 +7,13 @@ import ai.tock.bot.connector.ConnectorType
 import ai.tock.bot.connector.ConnectorTypeConfiguration
 import ai.tock.shared.resourceAsString
 
-internal object SampleRestConnectorProvider : ConnectorProvider {
+internal object EDFRestConnectorProvider : ConnectorProvider {
 
-    override val connectorType: ConnectorType get() = sampleRestConnectorType
+    override val connectorType: ConnectorType get() = edfRestConnectorType
 
     override fun connector(connectorConfiguration: ConnectorConfiguration): Connector {
         with(connectorConfiguration) {
-            return SampleRestConnector(
+            return EDFRestConnector(
                     connectorId,
                     path
             )
@@ -22,10 +22,10 @@ internal object SampleRestConnectorProvider : ConnectorProvider {
 
     override fun configuration(): ConnectorTypeConfiguration =
         ConnectorTypeConfiguration(
-                sampleRestConnectorType,
-            svgIcon = resourceAsString("/sampleConnector.svg")
+                edfRestConnectorType,
+            svgIcon = resourceAsString("/edfConnector.svg")
         )
 }
 
 //used in file META-INF/services/ai.tock.bot.connector.ConnectorProvider
-internal class SampleRestConnectorProviderService : ConnectorProvider by SampleRestConnectorProvider
+internal class EDFRestConnectorProviderService : ConnectorProvider by EDFRestConnectorProvider

@@ -19,12 +19,12 @@ import io.vertx.ext.web.RoutingContext
 import mu.KotlinLogging
 
 internal const val EDF_CONNECTOR_ID = "edf"
-val sampleRestConnectorType = ConnectorType(EDF_CONNECTOR_ID)
+val edfRestConnectorType = ConnectorType(EDF_CONNECTOR_ID)
 
-class SampleRestConnector internal constructor(
+class EDFRestConnector internal constructor(
     val applicationId: String,
     val path: String
-) : ConnectorBase(sampleRestConnectorType) {
+) : ConnectorBase(edfRestConnectorType) {
 
     companion object {
         private val logger = KotlinLogging.logger {}
@@ -35,7 +35,7 @@ class SampleRestConnector internal constructor(
     override fun register(controller: ConnectorController) {
         controller.registerServices(path) { router ->
             logger.info("Request for path $path from EDF Connector")
-            logger.info("deploy sample rest connector services for root path $path ")
+            logger.info("deploy edf rest connector services for root path $path ")
 
             router.post(path).handler { context ->
                 try {
@@ -57,12 +57,12 @@ class SampleRestConnector internal constructor(
         context: RoutingContext,
         body: String
     ) {
-        val timerData = BotRepository.requestTimer.start("sample_webhook")
+        val timerData = BotRepository.requestTimer.start("edf_webhook")
         try {
             logger.info("Etape 03")
-            logger.info { "Sample request input : $body" }
-            val request: SampleConnectorRequest = mapper.readValue(body)
-            val callback = SampleRestConnectorCallback(applicationId, request.locale, context)
+            logger.info { "EDF request input : $body" }
+            val request: EDFConnectorRequest = mapper.readValue(body)
+            val callback = EDFRestConnectorCallback(applicationId, request.locale, context)
             controller.handle(request.toEvent(applicationId), ConnectorData(callback))
         } catch (t: Throwable) {
             logger.info("Etape 04 $t")
@@ -75,7 +75,7 @@ class SampleRestConnector internal constructor(
     }
 
     override fun send(event: Event, callback: ConnectorCallback, delayInMs: Long) {
-        val c = callback as? SampleRestConnectorCallback
+        val c = callback as? EDFRestConnectorCallback
         c?.addAction(event)
         logger.info("Etape 06")
         if (event is Action) {
@@ -92,7 +92,7 @@ class SampleRestConnector internal constructor(
 
     override fun loadProfile(callback: ConnectorCallback, userId: PlayerId): UserPreferences {
         logger.info("Etape 10")
-        callback as SampleRestConnectorCallback
+        callback as EDFRestConnectorCallback
         return UserPreferences().apply {
             locale = callback.locale
         }

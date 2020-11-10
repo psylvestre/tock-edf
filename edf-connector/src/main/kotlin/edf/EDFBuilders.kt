@@ -10,31 +10,31 @@ import ai.tock.bot.engine.I18nTranslator
 import ai.tock.bot.engine.action.SendChoice
 
 /**
- * Adds a Sample [ConnectorMessage] if the current connector is Sample.
+ * Adds a EDF [ConnectorMessage] if the current connector is Sample.
  * You need to call [BotBus.send] or [BotBus.end] later to send this message.
  */
-fun BotBus.withSample(messageProvider: () -> SampleMessage): BotBus {
-    return withMessage(sampleRestConnectorType, messageProvider)
+fun BotBus.withEDF(messageProvider: () -> EDFMessage): BotBus {
+    return withMessage(edfRestConnectorType, messageProvider)
 }
 
 /**
  * Creates a text with buttons.
  */
-fun I18nTranslator.sampleMessage(title: CharSequence, vararg buttons: SampleButton): SampleMessage =
-        SampleMessage(
+fun I18nTranslator.edfMessage(title: CharSequence, vararg buttons: EDFButton): EDFMessage =
+        EDFMessage(
                 translate(title).toString(), buttons.toList()
         )
 
 /**
- * Creates a sample button.
+ * Creates a EDF button.
  */
-fun BotBus.sampleButton(
+fun BotBus.edfButton(
     title: CharSequence,
     targetIntent: IntentAware? = null,
     step: StoryStep<out StoryHandlerDefinition>? = null,
     parameters: Parameters = Parameters()
-): SampleButton =
-        SampleButton(
+): EDFButton =
+        EDFButton(
                 translate(title).toString(),
                 targetIntent?.let { i -> SendChoice.encodeChoiceId(this, i, step, parameters.toMap()) }
         )

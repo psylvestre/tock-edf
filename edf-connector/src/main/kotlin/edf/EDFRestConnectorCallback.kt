@@ -10,12 +10,12 @@ import mu.KotlinLogging
 import java.util.Locale
 import java.util.concurrent.CopyOnWriteArrayList
 
-internal class SampleRestConnectorCallback(
+internal class EDFRestConnectorCallback(
     applicationId: String,
     val locale: Locale,
     private val context: RoutingContext,
     private val actions: MutableList<Action> = CopyOnWriteArrayList()
-) : ConnectorCallbackBase(applicationId, sampleRestConnectorType) {
+) : ConnectorCallbackBase(applicationId, edfRestConnectorType) {
 
     private val logger = KotlinLogging.logger {}
 
@@ -38,14 +38,14 @@ internal class SampleRestConnectorCallback(
             .mapNotNull {
                 if (it.stringText != null) {
                     logger.info("Etape 14.1 $it")
-                    SampleMessage(it.stringText!!)
-                } else it.message(sampleRestConnectorType)?.let {
+                    EDFMessage(it.stringText!!)
+                } else it.message(edfRestConnectorType)?.let {
                     logger.info("Etape 14.2 map null")
-                    it as? SampleMessage
+                    it as? EDFMessage
                 }
 
             }
         logger.info("Etape 15 $messages")
-        context.response().end(mapper.writeValueAsString(SampleConnectorResponse(messages)))
+        context.response().end(mapper.writeValueAsString(EDFConnectorResponse(messages)))
     }
 }
