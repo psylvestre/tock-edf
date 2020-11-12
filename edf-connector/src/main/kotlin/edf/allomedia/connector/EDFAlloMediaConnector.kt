@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package edf.allomedia
+package edf.allomedia.connector
 
-import ai.tock.bot.connector.*
+import ai.tock.bot.connector.Connector
+import ai.tock.bot.connector.ConnectorCallback
+import ai.tock.bot.connector.ConnectorType
 import ai.tock.bot.engine.BotBus
 import ai.tock.bot.engine.ConnectorController
 import ai.tock.bot.engine.action.Action
@@ -34,14 +36,19 @@ import ai.tock.translator.UserInterfaceType.voiceAssistant
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.google.common.cache.CacheBuilder
+import edf.allomedia.callback.EDFAlloMediaConnectorCallback
+import edf.allomedia.request.EDFAlloMediaRequest
 import io.vertx.core.http.HttpHeaders
 import mu.KotlinLogging
 import java.time.Duration
 import java.util.*
 
-private class AlloMediaConnector(val applicationId: String, val path: String) : Connector {
+private val basicAuthEncoded = property("edf_allo_media_basic_auth", "")
+val edfAlloMediaConnectorType = ConnectorType("edfallomedia", voiceAssistant)
 
-    override val connectorType: ConnectorType = alloMediaConnectorType
+class EDFAlloMediaConnector(val applicationId: String, val path: String) : Connector {
+
+    override val connectorType: ConnectorType = edfAlloMediaConnectorType
 
     override fun register(controller: ConnectorController) {
         controller.registerServices(path) { router ->
@@ -54,8 +61,8 @@ private class AlloMediaConnector(val applicationId: String, val path: String) : 
                     else -> {
                         try {
                             val body = context.bodyAsString
-                            val request: AlloMediaRequest = mapper.readValue(body)
-                            val callback = AlloMediaConnectorCallback(
+                            val request: EDFAlloMediaRequest = mapper.readValue(body)
+                            val callback = EDFAlloMediaConnectorCallback(
                                     applicationId,
                                     request.session,
                                     context
@@ -75,7 +82,7 @@ private class AlloMediaConnector(val applicationId: String, val path: String) : 
                                         ?: "")
                                 }
                             )
-                            controller.handle(event, AlloMediaConnectorData(callback))
+                            controller.handle(event, EDFAlloMediaConnectorData(callback))
                         } catch (e: MissingKotlinParameterException) {
                             //malformed request
                             logger.warn(e)
@@ -94,7 +101,7 @@ private class AlloMediaConnector(val applicationId: String, val path: String) : 
     }
 
     override fun send(event: Event, callback: ConnectorCallback, delayInMs: Long) {
-        callback as AlloMediaConnectorCallback
+        callback as EDFAlloMediaConnectorCallback
         if (event is Action) {
             callback.actions.add(event)
             if (event.metadata.lastAnswer) {
@@ -111,29 +118,10 @@ private class AlloMediaConnector(val applicationId: String, val path: String) : 
     }
 }
 
-val alloMediaConnectorType = ConnectorType("allomedia", voiceAssistant)
-
-private object AlloMediaConnectorProvider : ConnectorProvider {
-
-    override val connectorType: ConnectorType = alloMediaConnectorType
-
-    override fun connector(connectorConfiguration: ConnectorConfiguration): Connector {
-        return AlloMediaConnector(
-                connectorConfiguration.connectorId,
-                connectorConfiguration.path
-        )
-    }
-
+fun BotBus.withEDFAlloMedia(message: EDFAlloMediaMessage): BotBus {
+    return withEDFAlloMedia { message }
 }
 
-class AlloMediaConnectorProviderService : ConnectorProvider by AlloMediaConnectorProvider
-
-fun BotBus.withAlloMedia(message: AlloMediaMessage): BotBus {
-    return withAlloMedia { message }
+fun BotBus.withEDFAlloMedia(messageProvider: () -> EDFAlloMediaMessage): BotBus {
+    return withMessage(edfAlloMediaConnectorType) { messageProvider.invoke() }
 }
-
-fun BotBus.withAlloMedia(messageProvider: () -> AlloMediaMessage): BotBus {
-    return withMessage(alloMediaConnectorType) { messageProvider.invoke() }
-}
-
-private val basicAuthEncoded = property("allo_media_basic_auth", "")

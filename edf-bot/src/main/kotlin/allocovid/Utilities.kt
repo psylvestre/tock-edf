@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package allocovid.allomedia
+package allocovid
 
 import ai.tock.nlp.entity.StringValue
 import java.math.BigDecimal

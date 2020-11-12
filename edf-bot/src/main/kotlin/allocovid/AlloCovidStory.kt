@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package allocovid.allomedia
+package allocovid
 
 import ai.tock.bot.connector.ConnectorMessage
 import ai.tock.bot.connector.web.webConnectorType
@@ -32,22 +32,9 @@ import ai.tock.bot.engine.message.TextWithSuggestions
 import ai.tock.nlp.entity.StringValue
 import ai.tock.shared.error
 import ai.tock.translator.raw
-import allocovid.allomedia.AlloCovidFeature.CORONAVIRUS_DEBUG_MODE
-import allocovid.allomedia.PrimaryIntent.detect_coronavirus
-import allocovid.allomedia.SecondaryIntent.ask_age
-import allocovid.allomedia.SecondaryIntent.ask_gender
-import allocovid.allomedia.SecondaryIntent.ask_height
-import allocovid.allomedia.SecondaryIntent.ask_postal_code
-import allocovid.allomedia.SecondaryIntent.ask_temperature
-import allocovid.allomedia.SecondaryIntent.ask_weight
-import allocovid.allomedia.SecondaryIntent.cancel
-import allocovid.allomedia.SecondaryIntent.do_not_known
-import allocovid.allomedia.SecondaryIntent.goodbye
-import allocovid.allomedia.SecondaryIntent.repeat
-import allocovid.allomedia.SecondaryIntent.reset
-import allocovid.allomedia.allomedia.AlloMediaMessage
-import allocovid.allomedia.allomedia.alloMediaConnectorType
-import allocovid.allomedia.allomedia.withAlloMedia
+import allocovid.AlloCovidFeature.CORONAVIRUS_DEBUG_MODE
+import allocovid.PrimaryIntent.detect_coronavirus
+import allocovid.SecondaryIntent.*
 import mu.KotlinLogging
 import kotlin.math.pow
 import kotlin.math.round

@@ -1,19 +1,24 @@
-package edf.allomedia
+package edf.allomedia.callback
 
 import ai.tock.bot.connector.ConnectorCallbackBase
 import ai.tock.bot.engine.action.Action
 import ai.tock.bot.engine.action.SendSentence
 import ai.tock.shared.jackson.mapper
+import edf.allomedia.connector.EDFAlloMediaMessage
+import edf.allomedia.response.EDFAlloMediaResponse
+import edf.allomedia.response.EDFOutputText
+import edf.allomedia.connector.edfAlloMediaConnectorType
+import edf.allomedia.request.EDFAlloMediaSession
 import io.vertx.core.http.HttpHeaders
 import io.vertx.ext.web.RoutingContext
 import java.util.concurrent.CopyOnWriteArrayList
 
-class AlloMediaConnectorCallback(
+class EDFAlloMediaConnectorCallback(
         applicationId: String,
-        val session: AlloMediaSession,
+        val session: EDFAlloMediaSession,
         val context: RoutingContext,
         val actions: MutableList<Action> = CopyOnWriteArrayList()
-) : ConnectorCallbackBase(applicationId, alloMediaConnectorType) {
+) : ConnectorCallbackBase(applicationId, edfAlloMediaConnectorType) {
 
     fun sendAnswer() {
         val res = context.response()
@@ -21,9 +26,9 @@ class AlloMediaConnectorCallback(
         res.statusCode = 201
         res.end(
             mapper.writeValueAsString(
-                    AlloMediaResponse(
+                    EDFAlloMediaResponse(
                             session.sessionId,
-                            OutputText(
+                            EDFOutputText(
                                     actions
                                             .asSequence()
                                             .filterIsInstance<SendSentence>()
@@ -35,8 +40,8 @@ class AlloMediaConnectorCallback(
                             actions
                                     .asSequence()
                                     .filterIsInstance<SendSentence>()
-                                    .mapNotNull { it.message(alloMediaConnectorType) }
-                                    .filterIsInstance<AlloMediaMessage>()
+                                    .mapNotNull { it.message(edfAlloMediaConnectorType) }
+                                    .filterIsInstance<EDFAlloMediaMessage>()
                                     .firstOrNull()
                                     ?.goodbye
                     )

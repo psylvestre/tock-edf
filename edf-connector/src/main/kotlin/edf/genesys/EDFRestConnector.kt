@@ -39,7 +39,7 @@ class EDFRestConnector internal constructor(
 
             router.post(path).handler { context ->
                 try {
-                    logger.info("Etape 01")
+                    logger.info("Etape 01 $path")
                     executor.executeBlocking {
                         handleRequest(controller, context, context.bodyAsString)
                     }

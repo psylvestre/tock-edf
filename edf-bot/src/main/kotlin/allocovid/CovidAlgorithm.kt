@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package allocovid.allomedia
+package allocovid
 
 import ai.tock.bot.definition.Intent
 import ai.tock.bot.definition.IntentAware
 import ai.tock.bot.engine.BotBus
 import ai.tock.shared.jackson.mapper
 import ai.tock.shared.resourceAsString
-import allocovid.allomedia.SecondaryIntent.ask_age
-import allocovid.allomedia.SecondaryIntent.ask_gender
-import allocovid.allomedia.SecondaryIntent.ask_height
-import allocovid.allomedia.SecondaryIntent.ask_postal_code
-import allocovid.allomedia.SecondaryIntent.ask_temperature
-import allocovid.allomedia.SecondaryIntent.ask_weight
-import allocovid.allomedia.SecondaryIntent.do_not_known
-import allocovid.allomedia.SecondaryIntent.no
-import allocovid.allomedia.SecondaryIntent.yes
+import allocovid.SecondaryIntent.ask_age
+import allocovid.SecondaryIntent.ask_gender
+import allocovid.SecondaryIntent.ask_height
+import allocovid.SecondaryIntent.ask_postal_code
+import allocovid.SecondaryIntent.ask_temperature
+import allocovid.SecondaryIntent.ask_weight
+import allocovid.SecondaryIntent.do_not_known
+import allocovid.SecondaryIntent.no
+import allocovid.SecondaryIntent.yes
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.module.kotlin.readValue
 import java.math.BigDecimal
@@ -89,9 +89,9 @@ data class Question(
 }
 
 data class Choice(
-        val answer: String,
-        val score: Score?,
-        val goto: String?
+    val answer: String,
+    val score: Score?,
+    val goto: String?
 ) {
     fun intents(nodeName: String?): List<IntentAware> =
         covidLabelIntentMap[answer]?.let {
@@ -103,25 +103,25 @@ data class Choice(
 }
 
 data class Score(
-        val fievre: Value? = null,
-        @JsonProperty("facteurs-gravite-mineurs")
+    val fievre: Value? = null,
+    @JsonProperty("facteurs-gravite-mineurs")
     val facteurs_gravite_mineurs: Value? = null,
-        val toux: Value? = null,
-        val anosmie: Value? = null,
-        val douleurs: Value? = null,
-        val diarrhees: Value? = null,
-        @JsonProperty("facteurs-gravite-majeurs")
+    val toux: Value? = null,
+    val anosmie: Value? = null,
+    val douleurs: Value? = null,
+    val diarrhees: Value? = null,
+    @JsonProperty("facteurs-gravite-majeurs")
     val facteurs_gravite_majeurs: Value? = null,
-        @JsonProperty("facteurs-pronostique")
+    @JsonProperty("facteurs-pronostique")
     val facteurs_pronostique: Value? = null,
-        val taille: Value? = null,
-        val age: Value? = null,
-        val poids: Value? = null,
-        val codePostal: Value? = null,
-        val temperature: Value? = null,
-        val homme: Value? = null,
-        val imc: Value? = null,
-        val export: ExportData = ExportData()
+    val taille: Value? = null,
+    val age: Value? = null,
+    val poids: Value? = null,
+    val codePostal: Value? = null,
+    val temperature: Value? = null,
+    val homme: Value? = null,
+    val imc: Value? = null,
+    val export: ExportData = ExportData()
 ) {
     fun addScore(score: Score?): Score =
         if (score == null) this
@@ -178,14 +178,14 @@ data class Conclusions(
 )
 
 data class ConclusionsList(
-        val FIN1: Conclusion,
-        val FIN8: Conclusion,
-        val FIN7: Conclusion,
-        val FIN3: Conclusion,
-        val FIN4: Conclusion,
-        val FIN5: Conclusion,
-        val FIN6: Conclusion,
-        val FIN2: Conclusion
+    val FIN1: Conclusion,
+    val FIN8: Conclusion,
+    val FIN7: Conclusion,
+    val FIN3: Conclusion,
+    val FIN4: Conclusion,
+    val FIN5: Conclusion,
+    val FIN6: Conclusion,
+    val FIN2: Conclusion
 )
 
 data class Conclusion(
