@@ -7,7 +7,7 @@ import ai.tock.bot.connector.ConnectorType
 import edf.allomedia.connector.EDFAlloMediaConnector
 import edf.allomedia.connector.edfAlloMediaConnectorType
 
-internal object AlloMediaConnectorProvider : ConnectorProvider {
+internal object EDFAlloMediaConnectorProvider : ConnectorProvider {
 
     override val connectorType: ConnectorType = edfAlloMediaConnectorType
 
@@ -19,4 +19,4 @@ internal object AlloMediaConnectorProvider : ConnectorProvider {
     }
 }
 
-internal class AlloMediaConnectorProviderService : ConnectorProvider by AlloMediaConnectorProvider
+internal class EDFAlloMediaConnectorProviderService : ConnectorProvider by EDFAlloMediaConnectorProvider
