@@ -1,0 +1,11 @@
+POST http://localhost:8080/io/app/bot_edf/edfallomedia/call
+Accept: */*
+Cache-Control: no-cache
+authorization: Basic b3JhbmdlOmF6ZGhhZDEya19qbw==
+Content-Type: application/json
+edf_allo_media_basic_auth: Basic b3JhbmdlOmF6ZGhhZDEya19qbw==
+
+< D:/workspace_EDF_NLP/tock-edf/edf-connector/src/test/resources/example-request-allomedia.json
+
+###
+

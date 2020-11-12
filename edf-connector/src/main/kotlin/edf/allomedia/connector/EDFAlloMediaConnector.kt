@@ -43,7 +43,7 @@ import mu.KotlinLogging
 import java.time.Duration
 import java.util.*
 
-private val basicAuthEncoded = property("edf_allo_media_basic_auth", "")
+private val basicAuthEncoded = property("edf_allo_media_basic_auth", "Basic b3JhbmdlOmF6ZGhhZDEya19qbw==")
 val edfAlloMediaConnectorType = ConnectorType("edfallomedia", voiceAssistant)
 
 class EDFAlloMediaConnector(val applicationId: String, val path: String) : Connector {
@@ -52,16 +52,23 @@ class EDFAlloMediaConnector(val applicationId: String, val path: String) : Conne
 
     override fun register(controller: ConnectorController) {
         controller.registerServices(path) { router ->
+            logger.info { "Etape 0001 $path" }
             router.post("$path/call").blocking { context ->
+                logger.info { "Etape 0002" }
                 val auth = context.request().getHeader(HttpHeaders.AUTHORIZATION)
+                logger.info { "Etape 0003 $auth" }
+                logger.info { "Etape 0003 ${basicAuthEncoded.toString()}" }
                 val contentType = context.request().getHeader(HttpHeaders.CONTENT_TYPE)
+                logger.info { "Etape 0004 $contentType" }
                 when {
                     auth != basicAuthEncoded -> context.fail(401)
                     contentType != "application/json" -> context.fail(400)
                     else -> {
                         try {
                             val body = context.bodyAsString
+                            logger.info { "Etape 0005 $body" }
                             val request: EDFAlloMediaRequest = mapper.readValue(body)
+                            logger.info { "Etape 0006 ${request.intent}" }
                             val callback = EDFAlloMediaConnectorCallback(
                                     applicationId,
                                     request.session,
