@@ -1,4 +1,4 @@
-package allocovid.allomedia.allomedia
+package edf.allomedia
 
 import java.util.*
 

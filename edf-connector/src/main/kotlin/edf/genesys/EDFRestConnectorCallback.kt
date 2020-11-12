@@ -1,4 +1,4 @@
-package edf
+package edf.genesys
 
 import ai.tock.bot.connector.ConnectorCallbackBase
 import ai.tock.bot.engine.action.Action
@@ -38,7 +38,7 @@ internal class EDFRestConnectorCallback(
             .mapNotNull {
                 if (it.stringText != null) {
                     logger.info("Etape 14.1 $it")
-                    EDFMessage(it.stringText!!)
+                    EDFMessage(it.applicationId!!, it.stringText!!)
                 } else it.message(edfRestConnectorType)?.let {
                     logger.info("Etape 14.2 map null")
                     it as? EDFMessage

@@ -1,4 +1,4 @@
-package allocovid.allomedia.allomedia
+package allocovid
 
 import ai.tock.bot.connector.ConnectorCallbackBase
 import ai.tock.bot.engine.action.Action

@@ -1,4 +1,4 @@
-package allocovid.allomedia.allomedia
+package edf.allomedia
 
 import ai.tock.bot.connector.ConnectorCallback
 import ai.tock.bot.connector.ConnectorData

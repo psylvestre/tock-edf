@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package allocovid.allomedia.allomedia
+package edf.allomedia
 
 import ai.tock.bot.connector.*
 import ai.tock.bot.engine.BotBus

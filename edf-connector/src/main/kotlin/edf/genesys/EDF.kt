@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package edf
+package edf.genesys
 
 import ai.tock.bot.connector.ConnectorHandler
 import ai.tock.bot.definition.ConnectorStoryHandler

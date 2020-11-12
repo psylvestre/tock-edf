@@ -1,4 +1,4 @@
-package edf
+package edf.genesys
 
 import ai.tock.bot.engine.action.SendChoice
 import ai.tock.bot.engine.action.SendSentence

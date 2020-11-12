@@ -1,4 +1,4 @@
-package edf
+package edf.genesys
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import ai.tock.bot.connector.ConnectorBase

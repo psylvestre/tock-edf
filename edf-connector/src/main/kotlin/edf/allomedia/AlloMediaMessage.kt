@@ -1,4 +1,4 @@
-package allocovid.allomedia.allomedia
+package edf.allomedia
 
 import ai.tock.bot.connector.ConnectorMessage
 import ai.tock.bot.connector.ConnectorType

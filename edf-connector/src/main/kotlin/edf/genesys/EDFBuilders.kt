@@ -1,4 +1,4 @@
-package edf
+package edf.genesys
 
 import ai.tock.bot.connector.ConnectorMessage
 import ai.tock.bot.definition.IntentAware
@@ -22,7 +22,7 @@ fun BotBus.withEDF(messageProvider: () -> EDFMessage): BotBus {
  */
 fun I18nTranslator.edfMessage(title: CharSequence, vararg buttons: EDFButton): EDFMessage =
         EDFMessage(
-                translate(title).toString(), buttons.toList()
+                "EDFMessage", translate(title).toString(), buttons.toList()
         )
 
 /**

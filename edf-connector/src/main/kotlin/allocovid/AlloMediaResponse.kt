@@ -1,4 +1,4 @@
-package allocovid.allomedia.allomedia
+package allocovid
 
 data class AlloMediaResponse(
         val sessionId: String,

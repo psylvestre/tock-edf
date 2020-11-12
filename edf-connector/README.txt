@@ -1,3 +1,3 @@
 Les différents Service Provider
-allocovid.allomedia.allomedia.AlloMediaConnectorProviderService
+allocovid.AlloMediaConnectorProviderService
 opendata.SampleRestConnectorProviderService

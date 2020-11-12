@@ -1,4 +1,4 @@
-package edf
+package edf.genesys
 
 import ai.tock.bot.connector.Connector
 import ai.tock.bot.connector.ConnectorConfiguration
