@@ -19,23 +19,18 @@
 
 package ai.tock.bot.edf
 
-import ai.tock.bot.connector.ga.gaMessage
-import ai.tock.bot.connector.ga.withGoogleAssistant
-import ai.tock.bot.connector.messenger.buttonsTemplate
-import ai.tock.bot.connector.messenger.postbackButton
-import ai.tock.bot.connector.messenger.withMessenger
-import ai.tock.bot.connector.slack.slackAttachment
-import ai.tock.bot.connector.slack.slackButton
-import ai.tock.bot.connector.slack.slackMessage
-import ai.tock.bot.connector.slack.withSlack
+import ai.tock.bot.definition.IntentAware
 import ai.tock.bot.definition.story
+import ai.tock.bot.engine.dialog.Dialog
+import ai.tock.bot.engine.user.UserTimelineDAO
 import ai.tock.bot.open.data.story.destination
 import ai.tock.bot.open.data.story.location
 import ai.tock.bot.open.data.story.origin
+import ai.tock.shared.jackson.mapper
+import edf.allomedia.connector.EDFAlloMediaMessage
+import edf.allomedia.connector.withEDFAlloMedia
+import edf.allomedia.response.EDFStoryResponse
 import mu.KotlinLogging
-import opendata.sampleButton
-import opendata.sampleMessage
-import opendata.withSample
 import org.litote.kmongo.json
 import org.litote.kmongo.util.idValue
 
@@ -54,6 +49,11 @@ val greetings = story("hello") {
     logger.info { "Info Dialog ${this.dialog}" }
     logger.info { "Info Entities ${this.entities}" }
     logger.info { "Info UserTimeLine ${this.userTimeline}" }
+    logger.info { "Info UserTimeLine ${this.userTimeline.dialogs.size}" }
+    logger.info { "Info UserTimeLine ${this.userTimeline.dialogs[0].id}" }
+    logger.info { "Info UserTimeLine ${this.userTimeline.dialogs[0].stories.size}" }
+    logger.info { "Info UserTimeLine ${this.userTimeline.dialogs[0].stories[0].starterIntent}" }
+    logger.info { "Info UserTimeLine ${this.userTimeline.dialogs[0].stories[0].definition}" }
     logger.info { "Info UserText ${this.userText}" }
     logger.info { "Info Story ${this.story}" }
     logger.info { "Info Step ${this.step}" }
@@ -69,8 +69,37 @@ val greetings = story("hello") {
     logger.info { "Info Location ${this.location}" }
     logger.info { "Info Origin ${this.origin}" }
     logger.info { "Info IdValue ${this.idValue}" }
-    logger.info { "Info Json ${this.json}" }
+    //logger.info { "Info Json ${this.json}" }
 
+    val response: EDFStoryResponse =
+        EDFStoryResponse(
+            //this.action,
+            null,
+            //this.botDefinition,
+            null,
+            //this.connectorData,
+            null,
+            this.dialog,
+            this.entities,
+            this.userTimeline,
+            this.userText,
+            this.story,
+            //this.step,
+            //this.userPreferences,
+            null,
+            this.intent,
+            this.applicationId,
+            this.botId,
+            this.contextId,
+            this.userId,
+            //this.stepName,
+            this.userLocale,
+            //this.idValue,
+            //null,
+            "Oui que puis-je faire pour vous",
+            this.userTimeline.dialogs[0].stories[0]
+        )
 
-    end("Oui que puis-je faire pour vous")
+    withEDFAlloMedia(EDFAlloMediaMessage(true))
+    end(mapper.writeValueAsString(response))
 }

@@ -126,9 +126,13 @@ class EDFAlloMediaConnector(val applicationId: String, val path: String) : Conne
 }
 
 fun BotBus.withEDFAlloMedia(message: EDFAlloMediaMessage): BotBus {
+    val logger = KotlinLogging.logger {}
+    logger.info("Info Avec Message $message")
     return withEDFAlloMedia { message }
 }
 
 fun BotBus.withEDFAlloMedia(messageProvider: () -> EDFAlloMediaMessage): BotBus {
+    val logger = KotlinLogging.logger {}
+    logger.info("Info Avec MessageProvider")
     return withMessage(edfAlloMediaConnectorType) { messageProvider.invoke() }
 }

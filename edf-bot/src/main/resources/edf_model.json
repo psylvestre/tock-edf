@@ -125,7 +125,7 @@
   "intents": [
     {
       "_id": "5faa7b5f34bf5e288b6e8b9c",
-      "name": "bonjour",
+      "name": "hello",
       "namespace": "app",
       "applications": [
         "5faa7b2834bf5e288b6e8b97"
@@ -146,8 +146,8 @@
   "sentences": [
     {
       "_id": "5faa7b3a63d4799532146750",
-      "text": "Bonjour",
-      "fullText": "Bonjour",
+      "text": "hello",
+      "fullText": "hello",
       "language": "fr",
       "applicationId": "5faa7b2834bf5e288b6e8b97",
       "creationDate": "2020-11-10T11:37:03.151+0000",
@@ -166,31 +166,6 @@
       "forReview": false,
       "reviewComment": null,
       "classifier": "admin@app.com",
-      "otherIntentsProbabilities": {
-      }
-    },
-    {
-      "_id": "5faa7b6563d4799532146cbd",
-      "text": "bonjour",
-      "fullText": "bonjour",
-      "language": "fr",
-      "applicationId": "5faa7b2834bf5e288b6e8b97",
-      "creationDate": "2020-11-10T11:38:08.855+0000",
-      "updateDate": "2020-11-10T11:38:08.855+0000",
-      "status": "inbox",
-      "classification": {
-        "intentId": "tock:unknown",
-        "entities": [
-        ]
-      },
-      "lastIntentProbability": 1.0,
-      "lastEntityProbability": 1.0,
-      "lastUsage": "2020-11-10T11:38:08.855+0000",
-      "usageCount": 2,
-      "unknownCount": 1,
-      "forReview": false,
-      "reviewComment": null,
-      "classifier": null,
       "otherIntentsProbabilities": {
       }
     }
