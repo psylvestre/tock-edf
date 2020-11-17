@@ -39,7 +39,7 @@ import org.litote.kmongo.util.idValue
  */
 private val logger = KotlinLogging.logger {}
 
-val greetings = story("hello") {
+val bonjour = story("bonjour") {
     //cleanup state
     resetDialogState()
 
