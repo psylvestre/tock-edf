@@ -1,0 +1,26 @@
+Initialisation par AM:
+======================
+
+https://bot.vsct.fr/io/allomedia/message:
+{"session": {"sessionId": "101-1604952834.9740944"}, "text": "", "intent": "detect_coronavirus_national", "sda": "+33970191579", "telephoneEntrant": "8c2b54484421a28b5626499ca5b2463e9c22988a6a30029b0b81103a7d9fd8a8", "telephoneAnonymous": false, "code_insee": "97200"} - {'Authorization': 'Basic b3JhbmdlOmF6ZGhhZDEya19qbw==', 'Content-Type': 'application/json'}
+
+Réponse: 200 OK
+{"sessionId": "101-1604952834.9740944", "outputText": {"textToSpeech": "Bonjour ! \nJe suis votre assistant virtuel Allo  COVIDE.\nLe questionnaire suivant a pour objectif, en 3 minutes, de vous orienter pour savoir quel comportement adopter en cas de sympt\u00f4mes du COVID 19. \nNous vous invitons \u00e0 le r\u00e9p\u00e9ter en cas de changement de situation.\nL'INSERM conservera vos donn\u00e9es, \u00e0 des fins de  recherche m\u00e9dicale, et pour le suivi \u00e9pid\u00e9miologique.\nPour en savoir plus sur vos donn\u00e9es et vos droits, dites \"mes droits\", ou \"mes donn\u00e9es\", ou rendez vous sur allocovide.com.\nEtes-vous pr\u00eat \u00e0 d\u00e9buter le questionnaire ?"}}
+
+
+
+Echange
+=======
+https://bot.vsct.fr/io/allomedia/message:
+{'session': {'sessionId': '101-1604952834.9740944'}, 'text': 'je suis au taquet', 'intent': ''} - {'Authorization': 'Basic b3JhbmdlOmF6ZGhhZDEya19qbw==', 'Content-Type': 'application/json'}
+
+Réponse: 200 OK
+{"sessionId": "101-1604952834.9740944", "outputText": {"textToSpeech": "Quel est votre \u00e2ge ?"}}
+
+
+https://bot.vsct.fr/io/allomedia/message:
+{'session': {'sessionId': '101-1604952834.9740944'}, 'text': '102 ans', 'intent': ''} - {'Authorization': 'Basic b3JhbmdlOmF6ZGhhZDEya19qbw==', 'Content-Type': 'application/json'}
+
+Réponse: 200 OK
+{"sessionId": "101-1604952834.9740944", "outputText": {"textToSpeech": "\u00cates-vous dans l'impossibilit\u00e9 de manger ou boire depuis 24 heures ou plus ?"}}
+

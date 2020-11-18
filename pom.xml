@@ -11,6 +11,8 @@
     <modules>
         <module>allomedia/edf-connector</module>
         <module>allomedia/edf-bot</module>
+        <module>genesys/edf-connector</module>
+        <module>genesys/edf-bot</module>
         <module>edf-bot-docker</module>
     </modules>
 
