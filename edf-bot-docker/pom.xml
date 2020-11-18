@@ -30,7 +30,7 @@
         <major>20.9-SNAPSHOT</major>
         <latest>latest-SNAPSHOT</latest>
         <tock>20.9.1-SNAPSHOT</tock>
-        <bot-edf>1.0-SNAPSHOT</bot-edf>
+        <bot-edf-allomedia>1.0-SNAPSHOT</bot-edf-allomedia>
         <stanford>20.9.1-SNAPSHOT</stanford>
         <demo>20.9.0</demo>
 
@@ -177,8 +177,8 @@
             </dependency>
             <dependency>
                 <groupId>ai.tock</groupId>
-                <artifactId>edf-bot</artifactId>
-                <version>${bot-edf}</version>
+                <artifactId>edf-bot-allomedia</artifactId>
+                <version>${bot-edf-allomedia}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

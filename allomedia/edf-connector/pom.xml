@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ai.tock</groupId>
-    <artifactId>edf-connector</artifactId>
+    <artifactId>edf-connector-allomedia</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

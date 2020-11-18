@@ -54,7 +54,7 @@
         </dependency>
         <dependency>
             <groupId>ai.tock</groupId>
-            <artifactId>edf-bot</artifactId>
+            <artifactId>edf-bot-allomedia</artifactId>
         </dependency>
     </dependencies>
 
