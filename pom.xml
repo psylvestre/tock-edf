@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>edf-connector</module>
-        <module>edf-bot</module>
+        <module>allomedia/edf-connector</module>
+        <module>allomedia/edf-bot</module>
         <module>edf-bot-docker</module>
     </modules>
 
