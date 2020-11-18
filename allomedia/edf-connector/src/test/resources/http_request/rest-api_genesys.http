@@ -1,8 +1,0 @@
-POST http://localhost:8080/io/app/bot_edf/edf
-Accept: */*
-Cache-Control: no-cache
-
-< D:/workspace_EDF_NLP/tock-edf/edf-connector/src/test/resources/example-request-genesys.json
-
-###
-

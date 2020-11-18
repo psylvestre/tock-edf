@@ -9,10 +9,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>allomedia/edf-connector</module>
-        <module>allomedia/edf-bot</module>
-        <module>genesys/edf-connector</module>
-        <module>genesys/edf-bot</module>
+        <module>edf-connector-allomedia</module>
+        <module>edf-connector-genesys</module>
+        <module>edf-bot</module>
         <module>edf-bot-docker</module>
     </modules>
 

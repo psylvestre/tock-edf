@@ -32,11 +32,7 @@
     <dependencies>
         <dependency>
             <groupId>ai.tock</groupId>
-            <artifactId>edf-bot-allomedia</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ai.tock</groupId>
-            <artifactId>edf-bot-genesys</artifactId>
+            <artifactId>edf-bot</artifactId>
         </dependency>
     </dependencies>
 
@@ -77,7 +73,7 @@
                                     </inline>
                                 </assembly>
                                 <cmd>
-                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dlogback.configurationFile='file:///maven/logback.xml' -cp '/maven/*' ai.tock.bot.edf.StartBotKt</shell>
+                                    <shell>java $JAVA_ARGS -Dfile.encoding=UTF-8 -Dlogback.configurationFile='file:///maven/logback.xml' -cp '/maven/*' edf.StartBotKt</shell>
                                 </cmd>
                                 <tags>
                                     <tag>${major}</tag>

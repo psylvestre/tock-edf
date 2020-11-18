@@ -1,0 +1,65 @@
+/*
+ *  This file is part of the tock-bot-open-data distribution.
+ *  (https://github.com/theopenconversationkit/tock-bot-open-data)
+ *  Copyright (c) 2017 VSCT.
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Affero General Public License for more details.
+ *
+ *   You should have received a copy of the GNU Affero General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package edf
+
+import ai.tock.bot.definition.story
+import ai.tock.shared.jackson.mapper
+import edf.allomedia.response.EDFStoryResponse
+import mu.KotlinLogging
+
+/**
+ * The greetings handler.
+ */
+private val logger = KotlinLogging.logger {}
+
+val greetings = story("hello") {
+    //cleanup state
+    resetDialogState()
+
+    Utilities.logData(this)
+
+    val response: EDFStoryResponse =
+        EDFStoryResponse(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            this.intent,
+            this.applicationId,
+            this.botId,
+            this.contextId,
+            this.userId,
+            null,
+            this.userLocale,
+            null,
+            null,
+            "Oui que puis-je faire pour vous",
+            null
+        )
+
+//    withEDFAlloMedia(EDFAlloMediaMessage(true))
+    end(mapper.writeValueAsString(response))
+}
