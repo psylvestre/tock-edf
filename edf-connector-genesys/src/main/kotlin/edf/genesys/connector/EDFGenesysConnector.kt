@@ -44,11 +44,11 @@ import java.time.Duration
 import java.util.*
 
 private val basicAuthEncoded = property("edf_allo_media_basic_auth", "Basic b3JhbmdlOmF6ZGhhZDEya19qbw==")
-val edfAlloMediaConnectorType = ConnectorType("edfgenesys", voiceAssistant)
+val edfGenesysConnectorType = ConnectorType("edfgenesys", voiceAssistant)
 
-class EDFAlloMediaConnector(val applicationId: String, val path: String) : Connector {
+class EDFGenesysConnector(val applicationId: String, val path: String) : Connector {
 
-    override val connectorType: ConnectorType = edfAlloMediaConnectorType
+    override val connectorType: ConnectorType = edfGenesysConnectorType
 
     override fun register(controller: ConnectorController) {
         controller.registerServices(path) { router ->
@@ -125,14 +125,14 @@ class EDFAlloMediaConnector(val applicationId: String, val path: String) : Conne
     }
 }
 
-fun BotBus.withEDFAlloMedia(message: EDFGenesysMessage): BotBus {
+fun BotBus.withEDFGenesys(message: EDFGenesysMessage): BotBus {
     val logger = KotlinLogging.logger {}
     logger.info("Info Avec Message $message")
-    return withEDFAlloMedia { message }
+    return withEDFGenesys { message }
 }
 
-fun BotBus.withEDFAlloMedia(messageProvider: () -> EDFGenesysMessage): BotBus {
+fun BotBus.withEDFGenesys(messageProvider: () -> EDFGenesysMessage): BotBus {
     val logger = KotlinLogging.logger {}
     logger.info("Info Avec MessageProvider")
-    return withMessage(edfAlloMediaConnectorType) { messageProvider.invoke() }
+    return withMessage(edfGenesysConnectorType) { messageProvider.invoke() }
 }

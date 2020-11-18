@@ -7,5 +7,5 @@ data class EDFGenesysMessage(
     val goodbye: Boolean? = null
 ) : ConnectorMessage {
 
-    override val connectorType: ConnectorType = edfAlloMediaConnectorType
+    override val connectorType: ConnectorType = edfGenesysConnectorType
 }

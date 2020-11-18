@@ -7,7 +7,7 @@ import ai.tock.shared.jackson.mapper
 import edf.genesys.connector.EDFGenesysMessage
 import edf.genesys.response.EDFGenesysResponse
 import edf.genesys.response.EDFOutputText
-import edf.genesys.connector.edfAlloMediaConnectorType
+import edf.genesys.connector.edfGenesysConnectorType
 import edf.genesys.request.EDFGenesysSession
 import io.vertx.core.http.HttpHeaders
 import io.vertx.ext.web.RoutingContext
@@ -19,7 +19,7 @@ class EDFGenesysConnectorCallback(
         val session: EDFGenesysSession,
         val context: RoutingContext,
         val actions: MutableList<Action> = CopyOnWriteArrayList()
-) : ConnectorCallbackBase(applicationId, edfAlloMediaConnectorType) {
+) : ConnectorCallbackBase(applicationId, edfGenesysConnectorType) {
 
     fun sendAnswer() {
         val logger = KotlinLogging.logger {}
@@ -49,7 +49,7 @@ class EDFGenesysConnectorCallback(
                             actions
                                     .asSequence()
                                     .filterIsInstance<SendSentence>()
-                                    .mapNotNull { it.message(edfAlloMediaConnectorType) }
+                                    .mapNotNull { it.message(edfGenesysConnectorType) }
                                     .filterIsInstance<EDFGenesysMessage>()
                                     .firstOrNull()
                                     ?.goodbye
