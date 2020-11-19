@@ -1,17 +1,14 @@
 package edf.allomedia.callback
 
 import ai.tock.bot.connector.ConnectorCallbackBase
-import ai.tock.bot.engine.BotBus
 import ai.tock.bot.engine.action.Action
 import ai.tock.bot.engine.action.SendSentence
 import ai.tock.shared.jackson.mapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import edf.allomedia.connector.EDFAlloMediaMessage
 import edf.allomedia.response.EDFAlloMediaResponse
 import edf.allomedia.response.EDFOutputText
 import edf.allomedia.connector.edfAlloMediaConnectorType
 import edf.allomedia.request.EDFAlloMediaSession
-import edf.allomedia.response.EDFStoryResponse
 import io.vertx.core.http.HttpHeaders
 import io.vertx.ext.web.RoutingContext
 import mu.KotlinLogging

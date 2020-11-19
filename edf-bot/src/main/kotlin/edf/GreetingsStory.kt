@@ -20,8 +20,6 @@
 package edf
 
 import ai.tock.bot.definition.story
-import ai.tock.shared.jackson.mapper
-import edf.allomedia.response.EDFStoryResponse
 import mu.KotlinLogging
 
 /**
@@ -35,31 +33,5 @@ val greetings = story("hello") {
 
     Utilities.logData(this)
 
-    val response: EDFStoryResponse =
-        EDFStoryResponse(
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            this.intent,
-            this.applicationId,
-            this.botId,
-            this.contextId,
-            this.userId,
-            null,
-            this.userLocale,
-            null,
-            null,
-            "Oui que puis-je faire pour vous",
-            null
-        )
-
-//    withEDFAlloMedia(EDFAlloMediaMessage(true))
-    end(mapper.writeValueAsString(response))
+    end("Bonjour, Que puis-je faire pour vous aider ?")
 }

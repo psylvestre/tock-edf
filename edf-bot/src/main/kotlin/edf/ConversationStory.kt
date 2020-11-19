@@ -21,7 +21,7 @@ package edf
 
 import ai.tock.bot.definition.story
 import ai.tock.shared.jackson.mapper
-import edf.allomedia.response.EDFStoryResponse
+import edf.genesys.response.EDFStoryResponse
 import mu.KotlinLogging
 
 /**
@@ -29,7 +29,7 @@ import mu.KotlinLogging
  */
 private val logger = KotlinLogging.logger {}
 
-val bonjour = story("bonjour") {
+val bonjour = story("xxxxxxxxxx") {
     //cleanup state
     resetDialogState()
 
@@ -60,6 +60,5 @@ val bonjour = story("bonjour") {
             null
         )
 
-//    withEDFAlloMedia(EDFAlloMediaMessage(true))
     end(mapper.writeValueAsString(response))
 }

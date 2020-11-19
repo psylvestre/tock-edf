@@ -4,7 +4,7 @@ Cache-Control: no-cache
 authorization: Basic b3JhbmdlOmF6ZGhhZDEya19qbw==
 Content-Type: application/json
 
-< D:/workspace_EDF_NLP/tock-edf/edf-connector-genesys/src/test/resources/example-request-genesys-hello.json
+< D:/workspace_EDF_NLP/tock-edf/edf-connector-genesys/src/test/resources/example-request-genesys-xxxxxxxxxx.json
 
 ###
 

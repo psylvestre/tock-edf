@@ -144,7 +144,7 @@
     },
     {
       "_id": "5faa7b5f34bf5e288b6e8b9d",
-      "name": "bonjour",
+      "name": "xxxxxxxxxx",
       "namespace": "app",
       "applications": [
         "5faa7b2834bf5e288b6e8b97"
@@ -190,8 +190,8 @@
     },
     {
       "_id": "5faa7b3a63d4799532146751",
-      "text": "bonjour",
-      "fullText": "bonjour",
+      "text": "xxxxxxxxxx",
+      "fullText": "xxxxxxxxxx",
       "language": "fr",
       "applicationId": "5faa7b2834bf5e288b6e8b97",
       "creationDate": "2020-11-10T11:37:03.151+0000",
