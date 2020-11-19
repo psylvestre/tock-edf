@@ -20,8 +20,8 @@
 package edf
 
 import ai.tock.bot.definition.story
+import ai.tock.bot.engine.action.Action
 import ai.tock.shared.jackson.mapper
-import edf.genesys.response.EDFStoryResponse
 import mu.KotlinLogging
 
 /**
@@ -29,36 +29,17 @@ import mu.KotlinLogging
  */
 private val logger = KotlinLogging.logger {}
 
-val bonjour = story("xxxxxxxxxx") {
+val conversation = story("xxxxxxxxxx") {
     //cleanup state
     resetDialogState()
 
     Utilities.logData(this)
 
-    val response: EDFStoryResponse =
-        EDFStoryResponse(
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            this.intent,
-            this.applicationId,
-            this.botId,
-            this.contextId,
-            this.userId,
-            null,
-            null,
-            null,
-            null,
-            "Oui ok, je peux vous aider",
-            null
-        )
+    val actions: List<Action> = this.dialog.allActions().sortedBy { it.date }
+    logger.info { "Info Json All Actions Sorted ${mapper.writeValueAsString(actions)}"}
 
-    end(mapper.writeValueAsString(response))
+    val conversation: List<Action> = this.dialog.allActions().filter { it.applicationId == "bot_edf" }.sortedBy { it.date }
+    logger.info { "Info Json All Bot Edf Actions Sorted ${mapper.writeValueAsString(conversation)}"}
+
+    end(mapper.writeValueAsString(conversation))
 }

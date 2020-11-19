@@ -44,8 +44,5 @@ object Utilities {
 //        logger.info { "Info IdValue ${botbus.idValue}" }
 //        logger.info { "Info Json ${botbus.json}" }
 
-        val actions: List<Action> = botbus.dialog.allActions().sortedBy { it.date }
-        logger.info { "Info Json All Actions Sorted ${mapper.writeValueAsString(actions)}"}
-
     }
 }

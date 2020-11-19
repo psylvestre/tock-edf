@@ -27,11 +27,11 @@ import mu.KotlinLogging
  */
 private val logger = KotlinLogging.logger {}
 
-val greetings = story("hello") {
+val bonjour = story("bonjour") {
     //cleanup state
     resetDialogState()
 
     Utilities.logData(this)
 
-    end("Hello, may i help you ?")
+    end("Bonjour, Que puis-je faire pour vous aider ?")
 }

@@ -4,6 +4,7 @@ import ai.tock.bot.connector.ConnectorCallbackBase
 import ai.tock.bot.engine.action.Action
 import ai.tock.bot.engine.action.SendSentence
 import ai.tock.shared.jackson.mapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import edf.genesys.connector.EDFGenesysMessage
 import edf.genesys.response.EDFGenesysResponse
 import edf.genesys.response.EDFOutputText
@@ -39,20 +40,21 @@ class EDFGenesysConnectorCallback(
                         .map { it.toString() }
                         .joinToString("\n")
         )
-        // val edfStoryResponse: EDFStoryResponse = mapper.readValue(edfOutputText.textToSpeech)
-        // logger.info("### Info StartIntent ${edfStoryResponse.story01?.starterIntent}")
+        val edfStoryResponse: List<SendSentence> = mapper.readValue(edfOutputText.textToSpeech)
+        logger.info("###>>> Info TextToSpeech ${edfOutputText.textToSpeech}")
+        logger.info("###>>> Info Action List ${edfStoryResponse.size}")
         res.end(
             mapper.writeValueAsString(
                     EDFGenesysResponse(
                             session.sessionId,
-                            edfOutputText,
                             actions
                                     .asSequence()
                                     .filterIsInstance<SendSentence>()
                                     .mapNotNull { it.message(edfGenesysConnectorType) }
                                     .filterIsInstance<EDFGenesysMessage>()
                                     .firstOrNull()
-                                    ?.goodbye
+                                    ?.goodbye,
+                            conversation = edfStoryResponse
                     )
             )
         )

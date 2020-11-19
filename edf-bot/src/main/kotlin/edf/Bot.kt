@@ -7,7 +7,8 @@ val edfBot = bot(
         stories =
         listOf(
                 greetings,
-                bonjour
+                bonjour,
+                conversation
         ),
         hello = greetings
 )
