@@ -25,7 +25,7 @@ import ai.tock.shared.jackson.mapper
 import mu.KotlinLogging
 
 /**
- * The greetings handler.
+ * The conversation handler.
  */
 private val logger = KotlinLogging.logger {}
 

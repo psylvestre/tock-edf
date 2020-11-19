@@ -39,8 +39,6 @@ class EDFAlloMediaConnectorCallback(
                         .map { it.toString() }
                         .joinToString("\n")
         )
-        // val edfStoryResponse: EDFStoryResponse = mapper.readValue(edfOutputText.textToSpeech)
-        // logger.info("### Info StartIntent ${edfStoryResponse.story01?.starterIntent}")
         res.end(
             mapper.writeValueAsString(
                     EDFAlloMediaResponse(

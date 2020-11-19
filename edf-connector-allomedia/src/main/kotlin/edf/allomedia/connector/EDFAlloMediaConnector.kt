@@ -74,9 +74,10 @@ class EDFAlloMediaConnector(val applicationId: String, val path: String) : Conne
                                     request.session,
                                     context
                             )
-                            val locale = request.locale?.also {
-                                cache.put(request.session.sessionId, it)
-                            }
+                            val locale = request.locale
+//                            locale?.also {
+//                                cache.put(request.session.sessionId, it)
+//                            }
 
                             val event = SendSentence(
                                 PlayerId(request.session.sessionId),

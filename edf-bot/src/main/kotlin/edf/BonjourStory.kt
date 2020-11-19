@@ -23,7 +23,7 @@ import ai.tock.bot.definition.story
 import mu.KotlinLogging
 
 /**
- * The greetings handler.
+ * The bonjour handler.
  */
 private val logger = KotlinLogging.logger {}
 
