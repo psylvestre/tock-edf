@@ -1,0 +1,11 @@
+{
+  "session": {
+    "sessionId": "1234567890"
+  },
+  "text": "bonjour mon ami",
+  "intent": "",
+  "sda": "+33970191579",
+  "telephoneEntrant": "8c2b54484421a28b5626499ca5b2463e9c22988a6a30029b0b81103a7d9fd8a8",
+  "telephoneAnonymous": false,
+  "code_insee": "97200"
+}

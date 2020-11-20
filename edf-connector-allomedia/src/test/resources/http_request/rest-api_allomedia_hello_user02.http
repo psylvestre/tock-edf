@@ -4,7 +4,7 @@ Cache-Control: no-cache
 authorization: Basic b3JhbmdlOmF6ZGhhZDEya19qbw==
 Content-Type: application/json
 
-< D:/workspace_EDF_NLP/tock-edf/edf-connector-allomedia/src/test/resources/example-request-allomedia-bonjour.json
+< D:/workspace_EDF_NLP/tock-edf/edf-connector-allomedia/src/test/resources/samples/example-request-allomedia-hello-user02.json
 
 ###
 
