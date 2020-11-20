@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-package edf.genesys.connector
+package allocovid
 
-import ai.tock.bot.connector.Connector
-import ai.tock.bot.connector.ConnectorCallback
-import ai.tock.bot.connector.ConnectorType
+import ai.tock.bot.connector.*
 import ai.tock.bot.engine.BotBus
 import ai.tock.bot.engine.ConnectorController
 import ai.tock.bot.engine.action.Action
@@ -36,40 +34,28 @@ import ai.tock.translator.UserInterfaceType.voiceAssistant
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.google.common.cache.CacheBuilder
-import edf.genesys.callback.EDFGenesysConnectorCallback
-import edf.genesys.request.EDFGenesysRequest
 import io.vertx.core.http.HttpHeaders
 import mu.KotlinLogging
 import java.time.Duration
 import java.util.*
 
-private val basicAuthEncoded = property("edf_allo_media_basic_auth", "Basic b3JhbmdlOmF6ZGhhZDEya19qbw==")
-val edfGenesysConnectorType = ConnectorType("edfgenesys", voiceAssistant)
+private class AlloMediaConnector(val applicationId: String, val path: String) : Connector {
 
-class EDFGenesysConnector(val applicationId: String, val path: String) : Connector {
-
-    override val connectorType: ConnectorType = edfGenesysConnectorType
+    override val connectorType: ConnectorType = alloMediaConnectorType
 
     override fun register(controller: ConnectorController) {
         controller.registerServices(path) { router ->
-            logger.info { "Etape 0001 $path" }
-            router.post("$path/conversation").blocking { context ->
-                logger.info { "Etape 0002" }
+            router.post("$path/call").blocking { context ->
                 val auth = context.request().getHeader(HttpHeaders.AUTHORIZATION)
-                logger.info { "Etape 0003 $auth" }
-                logger.info { "Etape 0003 ${basicAuthEncoded.toString()}" }
                 val contentType = context.request().getHeader(HttpHeaders.CONTENT_TYPE)
-                logger.info { "Etape 0004 $contentType" }
                 when {
                     auth != basicAuthEncoded -> context.fail(401)
                     contentType != "application/json" -> context.fail(400)
                     else -> {
                         try {
                             val body = context.bodyAsString
-                            logger.info { "Etape 0005 $body" }
-                            val request: EDFGenesysRequest = mapper.readValue(body)
-                            logger.info { "Etape 0006 ${request.intent}" }
-                            val callback = EDFGenesysConnectorCallback(
+                            val request: AlloMediaRequest = mapper.readValue(body)
+                            val callback = AlloMediaConnectorCallback(
                                     applicationId,
                                     request.session,
                                     context
@@ -89,7 +75,7 @@ class EDFGenesysConnector(val applicationId: String, val path: String) : Connect
                                         ?: "")
                                 }
                             )
-                            controller.handle(event, EDFGenesysConnectorData(callback))
+                            controller.handle(event, AlloMediaConnectorData(callback))
                         } catch (e: MissingKotlinParameterException) {
                             //malformed request
                             logger.warn(e)
@@ -108,7 +94,7 @@ class EDFGenesysConnector(val applicationId: String, val path: String) : Connect
     }
 
     override fun send(event: Event, callback: ConnectorCallback, delayInMs: Long) {
-        callback as EDFGenesysConnectorCallback
+        callback as AlloMediaConnectorCallback
         if (event is Action) {
             callback.actions.add(event)
             if (event.metadata.lastAnswer) {
@@ -125,14 +111,29 @@ class EDFGenesysConnector(val applicationId: String, val path: String) : Connect
     }
 }
 
-fun BotBus.withEDFGenesys(message: EDFGenesysMessage): BotBus {
-    val logger = KotlinLogging.logger {}
-    logger.info("Info Avec Message $message")
-    return withEDFGenesys { message }
+val alloMediaConnectorType = ConnectorType("allomedia", voiceAssistant)
+
+private object AlloMediaConnectorProvider : ConnectorProvider {
+
+    override val connectorType: ConnectorType = alloMediaConnectorType
+
+    override fun connector(connectorConfiguration: ConnectorConfiguration): Connector {
+        return AlloMediaConnector(
+                connectorConfiguration.connectorId,
+                connectorConfiguration.path
+        )
+    }
+
 }
 
-fun BotBus.withEDFGenesys(messageProvider: () -> EDFGenesysMessage): BotBus {
-    val logger = KotlinLogging.logger {}
-    logger.info("Info Avec MessageProvider")
-    return withMessage(edfGenesysConnectorType) { messageProvider.invoke() }
+class AlloMediaConnectorProviderService : ConnectorProvider by AlloMediaConnectorProvider
+
+fun BotBus.withAlloMedia(message: AlloMediaMessage): BotBus {
+    return withAlloMedia { message }
 }
+
+fun BotBus.withAlloMedia(messageProvider: () -> AlloMediaMessage): BotBus {
+    return withMessage(alloMediaConnectorType) { messageProvider.invoke() }
+}
+
+private val basicAuthEncoded = property("allo_media_basic_auth", "")
