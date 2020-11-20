@@ -35,9 +35,6 @@ val conversation = story("xxxxxxxxxx") {
 
     Utilities.logData(this)
 
-    val actions: List<Action> = this.dialog.allActions().sortedBy { it.date }
-    logger.info { "Info Json All Actions Sorted ${mapper.writeValueAsString(actions)}"}
-
     val conversation: List<Action> = this.dialog.allActions().filter { it.applicationId == "bot_edf" }.sortedBy { it.date }
     logger.info { "Info Json All Bot Edf Actions Sorted ${mapper.writeValueAsString(conversation)}"}
 
