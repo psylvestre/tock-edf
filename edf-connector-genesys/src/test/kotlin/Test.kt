@@ -1,9 +1,5 @@
-package edf.genesys
-
-import ai.tock.bot.engine.action.Action
 import ai.tock.bot.engine.action.SendSentence
 import ai.tock.shared.jackson.mapper
-import chat.rocket.common.util.ifNull
 import com.fasterxml.jackson.module.kotlin.readValue
 import edf.genesys.response.EDFSentence
 
@@ -24,5 +20,14 @@ fun main(args: Array<String>) {
                 println("Date     : ${s.date}")
             }
         }
+    }
+    val results: List<EDFSentence> = liste.map {
+        EDFSentence(it.text, it.nlpStats?.nlpResult?.intent, it.date)
+    }
+
+    results.forEach {
+        println("Texte     : ${it.text}")
+        println("Intention : ${it.intent}")
+        println("Quand     : ${it.date}")
     }
 }

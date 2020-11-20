@@ -10,6 +10,7 @@ import edf.genesys.response.EDFGenesysResponse
 import edf.genesys.response.EDFOutputText
 import edf.genesys.connector.edfGenesysConnectorType
 import edf.genesys.request.EDFGenesysSession
+import edf.genesys.response.EDFSentence
 import io.vertx.core.http.HttpHeaders
 import io.vertx.ext.web.RoutingContext
 import mu.KotlinLogging
@@ -40,20 +41,24 @@ class EDFGenesysConnectorCallback(
                         .map { it.toString() }
                         .joinToString("\n")
         )
-        val edfStoryResponse: List<Action> = mapper.readValue(edfOutputText.textToSpeech)
+        val edfStoryResponse: List<SendSentence> = mapper.readValue(edfOutputText.textToSpeech)
         logger.info("###>>> Info Action List ${edfStoryResponse.size}")
+
+        val results: List<EDFSentence> = edfStoryResponse.map {
+            EDFSentence(it.text, it.nlpStats?.nlpResult?.intent, it.date)
+        }
+
+        results.forEach {
+            println("Texte     : ${it.text}")
+            println("Intention : ${it.intent}")
+            println("Quand     : ${it.date}")
+        }
+
         res.end(
             mapper.writeValueAsString(
                     EDFGenesysResponse(
                             session.sessionId,
-                            edfOutputText,
-                            actions
-                                    .asSequence()
-                                    .filterIsInstance<SendSentence>()
-                                    .mapNotNull { it.message(edfGenesysConnectorType) }
-                                    .filterIsInstance<EDFGenesysMessage>()
-                                    .firstOrNull()
-                                    ?.goodbye
+                            results
                     )
             )
         )
