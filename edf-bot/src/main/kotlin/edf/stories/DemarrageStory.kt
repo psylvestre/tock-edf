@@ -20,6 +20,9 @@
 package edf
 
 import ai.tock.bot.definition.story
+import ai.tock.bot.engine.action.Action
+import ai.tock.bot.engine.dialog.EventState
+import ai.tock.bot.engine.message.Message
 import mu.KotlinLogging
 
 /**
@@ -32,6 +35,10 @@ val demarrage = story("demarrage") {
     resetDialogState()
 
     Utilities.logData(this)
+
+//    val evt : EventState
+//    val act : Action
+//    val mes : Message
 
     end("Bonjour, Que puis-je faire pour vous aider ?")
 }

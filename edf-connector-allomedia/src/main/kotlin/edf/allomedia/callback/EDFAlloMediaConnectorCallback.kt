@@ -26,6 +26,8 @@ class EDFAlloMediaConnectorCallback(
         actions.forEach {
             logger.info("### Info ${it.javaClass}")
             logger.info("### Info ${it.playerId}")
+            logger.info("### Info ${it.metadata}")
+            logger.info("### Info ${it.state}")
         }
         val res = context.response()
         res.putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
