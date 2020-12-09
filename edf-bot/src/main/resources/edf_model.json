@@ -179,6 +179,25 @@
       "label": null,
       "description": null,
       "category": "build"
+    },
+    {
+      "_id": "5faa7b5f34bf5e288b6e8b9f",
+      "name": "demarrage",
+      "namespace": "app",
+      "applications": [
+        "5faa7b2834bf5e288b6e8b97"
+      ],
+      "entities": [
+      ],
+      "entitiesRegexp": {
+      },
+      "mandatoryStates": [
+      ],
+      "sharedIntents": [
+      ],
+      "label": null,
+      "description": null,
+      "category": "build"
     }
   ],
   "sentences": [
@@ -243,6 +262,31 @@
       "status": "model",
       "classification": {
         "intentId": "5faa7b5f34bf5e288b6e8b9d",
+        "entities": [
+        ]
+      },
+      "lastIntentProbability": 1.0,
+      "lastEntityProbability": 1.0,
+      "lastUsage": "2020-11-10T11:37:22.124+0000",
+      "usageCount": 2,
+      "unknownCount": 0,
+      "forReview": false,
+      "reviewComment": null,
+      "classifier": "admin@app.com",
+      "otherIntentsProbabilities": {
+      }
+    },
+    {
+      "_id": "5faa7b3a63d4799532146754",
+      "text": "demarrage",
+      "fullText": "demarrage",
+      "language": "fr",
+      "applicationId": "5faa7b2834bf5e288b6e8b97",
+      "creationDate": "2020-11-10T11:37:03.151+0000",
+      "updateDate": "2020-11-10T11:37:03.971+0000",
+      "status": "model",
+      "classification": {
+        "intentId": "5faa7b5f34bf5e288b6e8b9f",
         "entities": [
         ]
       },

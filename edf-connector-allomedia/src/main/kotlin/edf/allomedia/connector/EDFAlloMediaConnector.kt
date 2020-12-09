@@ -69,6 +69,9 @@ class EDFAlloMediaConnector(val applicationId: String, val path: String) : Conne
                             logger.info { "Etape 0005 $body" }
                             val request: EDFAlloMediaRequest = mapper.readValue(body)
                             logger.info { "Etape 0006 ${request.intent}" }
+                            if (request.intent === "demarrage") {
+                                request.text = request.intent;
+                            }
                             val callback = EDFAlloMediaConnectorCallback(
                                     applicationId,
                                     request.session,

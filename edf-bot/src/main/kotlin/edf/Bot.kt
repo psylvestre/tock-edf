@@ -6,6 +6,7 @@ val edfBot = bot(
         "bot_edf",
         stories =
         listOf(
+                demarrage,
                 greetings,
                 bonjour,
                 conversation

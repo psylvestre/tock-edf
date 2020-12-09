@@ -33,5 +33,5 @@ val bonjour = story("bonjour") {
 
     Utilities.logData(this)
 
-    end("Bonjour, Que puis-je faire pour vous aider ?")
+    end("Bonjour, A votre disposition ?")
 }
