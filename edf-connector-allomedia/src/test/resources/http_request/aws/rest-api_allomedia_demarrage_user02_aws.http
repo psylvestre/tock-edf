@@ -1,0 +1,10 @@
+POST http://tock-alb-736178412.eu-west-1.elb.amazonaws.com:443/io/app/bot_edf/edfallomedia/call
+Accept: */*
+Cache-Control: no-cache
+authorization: Basic b3JhbmdlOmF6ZGhhZDEya19qbw==
+Content-Type: application/json
+
+< D:/workspace_EDF_NLP/tock-edf/edf-connector-allomedia/src/test/resources/samples/example-request-allomedia-demarrage-user02.json
+
+###
+

@@ -1,10 +1,7 @@
 package edf
 
 import ai.tock.bot.definition.bot
-import edf.stories.bonjour
-import edf.stories.conversation
-import edf.stories.demarrage
-import edf.stories.greetings
+import edf.stories.*
 
 val edfBot = bot(
         "bot_edf",
@@ -13,6 +10,7 @@ val edfBot = bot(
                 demarrage,
                 greetings,
                 bonjour,
+                billing,
                 conversation
         ),
         hello = greetings
