@@ -17,12 +17,10 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edf
+package edf.stories
 
 import ai.tock.bot.definition.story
-import ai.tock.bot.engine.action.Action
-import ai.tock.bot.engine.dialog.EventState
-import ai.tock.bot.engine.message.Message
+import edf.Utilities
 import mu.KotlinLogging
 
 /**
@@ -36,9 +34,6 @@ val demarrage = story("demarrage") {
 
     Utilities.logData(this)
 
-//    val evt : EventState
-//    val act : Action
-//    val mes : Message
-
-    end("Bonjour, Que puis-je faire pour vous aider ?")
+    send("Bonjour, Que puis-je faire pour vous aider ?")
+    end()
 }

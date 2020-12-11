@@ -44,9 +44,12 @@ class EDFGenesysConnectorCallback(
         val edfStoryResponse: List<SendSentence> = mapper.readValue(edfOutputText.textToSpeech)
         logger.info("###>>> Info Action List ${edfStoryResponse.size}")
 
-        val results: List<EDFSentence> = edfStoryResponse.map {
-            EDFSentence(it.text, it.nlpStats?.nlpResult?.intent, it.date)
-        }
+        val results: List<EDFSentence> = edfStoryResponse
+            .filter { it.text != null || it.nlpStats?.nlpResult?.intent != null }
+            .map {
+                EDFSentence(it.text, it.nlpStats?.nlpResult?.intent, it.date)
+            }
+        logger.info("###>>> Info Results List ${results.size}")
 
         results.forEach {
             println("Texte     : ${it.text}")

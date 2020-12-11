@@ -17,11 +17,12 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edf
+package edf.stories
 
 import ai.tock.bot.definition.story
 import ai.tock.bot.engine.action.Action
 import ai.tock.shared.jackson.mapper
+import edf.Utilities
 import mu.KotlinLogging
 
 /**
@@ -35,7 +36,10 @@ val conversation = story("xxxxxxxxxx") {
 
     Utilities.logData(this)
 
-    val conversation: List<Action> = this.dialog.allActions().filter { it.applicationId == "bot_edf" }.sortedBy { it.date }
+    val conversation: List<Action> = this.dialog.allActions()
+        .filter { it.applicationId == "bot_edf" }
+        .also { println(it) }
+        .sortedBy { it.date }
     logger.info { "Info Json All Bot Edf Actions Sorted ${mapper.writeValueAsString(conversation)}"}
 
     end(mapper.writeValueAsString(conversation))

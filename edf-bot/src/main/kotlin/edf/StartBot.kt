@@ -38,7 +38,7 @@ object StartBot {
         System.setProperty("tock_default_locale", "fr")
 
         //enable i18n as two locales are supported
-        Translator.enabled = true
+        Translator.enabled = false
 
         //register the bot
         registerAndInstallBot(edfBot)

@@ -4,7 +4,6 @@ import ai.tock.bot.connector.ConnectorCallbackBase
 import ai.tock.bot.engine.action.Action
 import ai.tock.bot.engine.action.SendSentence
 import ai.tock.shared.jackson.mapper
-import edf.allomedia.connector.EDFAlloMediaMessage
 import edf.allomedia.response.EDFAlloMediaResponse
 import edf.allomedia.response.EDFOutputText
 import edf.allomedia.connector.edfAlloMediaConnectorType
@@ -23,11 +22,15 @@ class EDFAlloMediaConnectorCallback(
 
     fun sendAnswer() {
         val logger = KotlinLogging.logger {}
+        var transfer = true;
         actions.forEach {
             logger.info("### Info ${it.javaClass}")
             logger.info("### Info ${it.playerId}")
             logger.info("### Info ${it.metadata}")
             logger.info("### Info ${it.state}")
+            if (!it.metadata.lastAnswer) {
+                transfer = false;
+            }
         }
         val res = context.response()
         res.putHeader(HttpHeaders.CONTENT_TYPE, "application/json")
@@ -41,20 +44,26 @@ class EDFAlloMediaConnectorCallback(
                         .map { it.toString() }
                         .joinToString("\n")
         )
-        res.end(
-            mapper.writeValueAsString(
+        if (transfer) {
+            res.end(
+                mapper.writeValueAsString(
                     EDFAlloMediaResponse(
-                            session.sessionId,
-                            edfOutputText,
-                            actions
-                                    .asSequence()
-                                    .filterIsInstance<SendSentence>()
-                                    .mapNotNull { it.message(edfAlloMediaConnectorType) }
-                                    .filterIsInstance<EDFAlloMediaMessage>()
-                                    .firstOrNull()
-                                    ?.goodbye
+                        session.sessionId,
+                        edfOutputText,
+                        transfer,
+                        "+33123456789"
                     )
+                )
             )
-        )
+        } else {
+            res.end(
+                mapper.writeValueAsString(
+                    EDFAlloMediaResponse(
+                        session.sessionId,
+                        edfOutputText
+                    )
+                )
+            )
+        }
     }
 }

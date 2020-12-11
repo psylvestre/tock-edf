@@ -17,9 +17,10 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edf
+package edf.stories
 
 import ai.tock.bot.definition.story
+import edf.Utilities
 import mu.KotlinLogging
 
 /**
