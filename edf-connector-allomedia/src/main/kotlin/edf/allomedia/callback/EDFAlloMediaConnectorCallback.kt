@@ -50,7 +50,6 @@ class EDFAlloMediaConnectorCallback(
                     EDFAlloMediaResponse(
                         session.sessionId,
                         edfOutputText,
-                        transfer,
                         "+33645799228"
                     )
                 )
